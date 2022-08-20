@@ -65,7 +65,5 @@ type ttSliceIt = *sliceIterator[int]
 
 var (
 	_ Iterator[int]      = ttSliceIt(nil)
-	_ SizeHinter         = ttSliceIt(nil)
 	_ CollectorInto[int] = ttSliceIt(nil)
-	_ Dropper            = ttSliceIt(nil)
 )

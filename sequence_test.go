@@ -23,8 +23,6 @@ func TestSequence(t *testing.T) {
 
 func BenchmarkSequence(b *testing.B) {
 	funcs := []tuple.T2[string, func(*testing.B, int)]{
-		tuple.New2("D:v1", benchmarkSequenceDropA),
-		tuple.New2("D:v2", benchmarkSequenceDropB),
 		tuple.New2("C:v1", benchmarkSequenceCollectA),
 		tuple.New2("C:v2", benchmarkSequenceCollectB),
 	}
@@ -42,18 +40,6 @@ func BenchmarkSequence(b *testing.B) {
 				})
 			}
 		})
-	}
-}
-
-func benchmarkSequenceDropA(b *testing.B, n int) {
-	for i := 0; i != b.N; i++ {
-		iter.DropAll[int](iter.Sequence(0, n))
-	}
-}
-
-func benchmarkSequenceDropB(b *testing.B, n int) {
-	for i := 0; i != b.N; i++ {
-		iter.Sequence(0, n).DropAll()
 	}
 }
 
