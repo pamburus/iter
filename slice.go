@@ -1,7 +1,7 @@
 package iter
 
 // Slice returns an Iterator that iterates over elements in a slice.
-func Slice[T any](values []T) It[T, *sliceIterator[T]] {
+func Slice[T any](values []T) It[T] {
 	return New[T](&sliceIterator[T]{values})
 }
 

@@ -4,7 +4,7 @@ import "github.com/barweiss/go-tuple"
 
 // Enumerate returns an Iterator adapter that Enumerates each value provided by the
 // underlying iterator using fn.
-func Enumerate[T any, I Iterator[T]](it I) It[tuple.T2[Size, T], *enumerateIterator[T, I]] {
+func Enumerate[T any, I Iterator[T]](it I) It[tuple.T2[Size, T]] {
 	return New[tuple.T2[Size, T]](&enumerateIterator[T, I]{it, 0})
 }
 
