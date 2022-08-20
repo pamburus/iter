@@ -26,6 +26,26 @@ func (i It[T, I]) CollectInto(result []T) []T {
 	return CollectInto(i.it, result)
 }
 
+func (i It[T, I]) CollectN(n int) []T {
+	return CollectN[T](Iterator[T](i.it), n)
+}
+
+func (i It[T, I]) CollectNInto(n int, result []T) []T {
+	return CollectNInto(Iterator[T](i.it), n, result)
+}
+
+func (i It[T, I]) Drop(n Size) Size {
+	return Drop[T](Iterator[T](i.it), n)
+}
+
+func (i It[T, I]) DropAll() Size {
+	return DropAll[T](Iterator[T](i.it))
+}
+
+func (i It[T, I]) SizeHint() (Size, bool) {
+	return SizeHint[T](i.it)
+}
+
 // ---
 
 var _ complete[int] = It[int, Iterator[int]]{}
