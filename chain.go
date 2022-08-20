@@ -2,7 +2,7 @@ package iter
 
 // Chain returns an Iterator adapter that Chains each value provided by the
 // underlying iterator using fn.
-func Chain[T any](its ...Iterator[T]) It[T, *chainIterator[T]] {
+func Chain[T any](its ...Iterator[T]) It[T] {
 	return New[T](&chainIterator[T]{its})
 }
 

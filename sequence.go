@@ -5,7 +5,7 @@ import (
 )
 
 // Sequence returns an Iterator that produces incrementally sequential integer numbers from begin up to to end, end is not included.
-func Sequence[T constraints.Integer](begin, end T) It[T, *sequenceIterator[T]] {
+func Sequence[T constraints.Integer](begin, end T) It[T] {
 	return New[T](&sequenceIterator[T]{begin, end})
 }
 

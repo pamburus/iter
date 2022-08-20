@@ -2,7 +2,7 @@ package iter
 
 // Filter returns an Iterator adapter that Filters each value provided by the
 // underlying iterator using fn.
-func Filter[T any, I Iterator[T], F ~func(T) bool](it I, fn F) It[T, *filterIterator[T, I, F]] {
+func Filter[T any, I Iterator[T], F ~func(T) bool](it I, fn F) It[T] {
 	return New[T](&filterIterator[T, I, F]{it, fn})
 }
 

@@ -4,7 +4,7 @@ import "math"
 
 // Take returns an iterator that limits that yields up to (but no more than) n
 // values from the input iterator.
-func Take[T any, I Iterator[T]](it I, n Size) It[T, *takeIterator[T, I]] {
+func Take[T any, I Iterator[T]](it I, n Size) It[T] {
 	return New[T](&takeIterator[T, I]{it, n})
 }
 

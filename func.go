@@ -1,7 +1,7 @@
 package iter
 
 // Func returns a FuncIterator that calls the provided function to get next value.
-func Func[T any, F ~func() (T, bool)](fn F) It[T, *funcIterator[T, F]] {
+func Func[T any, F ~func() (T, bool)](fn F) It[T] {
 	return New[T](&funcIterator[T, F]{fn})
 }
 

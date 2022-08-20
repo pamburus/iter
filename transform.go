@@ -2,7 +2,7 @@ package iter
 
 // Transform returns an Iterator adapter that transforms each value provided by the
 // underlying iterator using fn.
-func Transform[T, R any, I Iterator[T], F ~func(T) R](it I, fn F) It[R, *transformIterator[T, R, I, F]] {
+func Transform[T, R any, I Iterator[T], F ~func(T) R](it I, fn F) It[R] {
 	return New[R](&transformIterator[T, R, I, F]{it, fn})
 }
 

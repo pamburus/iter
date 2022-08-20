@@ -1,7 +1,7 @@
 package iter
 
 // Empty returns an Iterator that has no values.
-func Empty[T any]() It[T, emptyIterator[T]] {
+func Empty[T any]() It[T] {
 	return New[T](emptyIterator[T]{})
 }
 
@@ -9,10 +9,6 @@ func Empty[T any]() It[T, emptyIterator[T]] {
 
 // emptyIterator returns no values.
 type emptyIterator[T any] struct{}
-
-func (i emptyIterator[T]) It() It[T, emptyIterator[T]] {
-	return New[T](i)
-}
 
 // Iter returns self.
 // Next returns zero value and false.
