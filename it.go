@@ -56,8 +56,8 @@ func (i It[T, I]) CollectNInto(n int, result []T) []T {
 	return CollectNInto(Iterator[T](i.it), n, result)
 }
 
-func (i It[T, I]) Take(n Size) It[T, *takeIterator[T, Iterator[T]]] {
-	return Take[T](Iterator[T](i.it), n)
+func (i It[T, I]) Take(n Size) It[T, Iterator[T]] {
+	return New[T](Iterator[T](Take[T](Iterator[T](i.it), n).it))
 }
 
 func (i It[T, I]) Drop(n Size) Size {
@@ -68,12 +68,12 @@ func (i It[T, I]) DropAll() Size {
 	return DropAll[T](Iterator[T](i.it))
 }
 
-func (i It[T, I]) Filter(predicate func(T) bool) It[T, *filterIterator[T, Iterator[T], func(T) bool]] {
-	return Filter(Iterator[T](i.it), predicate)
+func (i It[T, I]) Filter(predicate func(T) bool) It[T, Iterator[T]] {
+	return New[T](Iterator[T](Filter(Iterator[T](i.it), predicate).it))
 }
 
-func (i It[T, I]) Chain(other ...Iterator[T]) It[T, *chainIterator[T]] {
-	return Chain(append([]Iterator[T]{i.it}, other...)...)
+func (i It[T, I]) Chain(other ...Iterator[T]) It[T, Iterator[T]] {
+	return New[T](Iterator[T](Chain(append([]Iterator[T]{i.it}, other...)...).it))
 }
 
 func (i It[T, I]) Reduce(f func(T, T) T) optional.Value[T] {
