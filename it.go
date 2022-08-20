@@ -46,6 +46,10 @@ func (i It[T, I]) SizeHint() (Size, bool) {
 	return SizeHint[T](i.it)
 }
 
+func (i It[T, I]) WithSizeHint(n Size) It[T, *sizeHintIterator[T, Iterator[T]]] {
+	return WithSizeHint[T](Iterator[T](i.it), n)
+}
+
 // ---
 
 var _ complete[int] = It[int, Iterator[int]]{}
