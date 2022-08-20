@@ -71,8 +71,5 @@ func (i *sequenceIterator[T]) len() T {
 type ttSequenceIt = *sequenceIterator[int]
 
 var (
-	_ SizeHinter          = ttSequenceIt(nil)
-	_ Dropper             = ttSequenceIt(nil)
-	_ CollectorInto[int]  = ttSequenceIt(nil)
-	_ CollectorNInto[int] = ttSequenceIt(nil)
+	_ Iterator[int] = ttSequenceIt(nil)
 )

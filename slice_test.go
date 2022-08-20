@@ -9,8 +9,6 @@ import (
 
 func BenchmarkSlice(b *testing.B) {
 	funcs := []tuple.T2[string, func(*testing.B, int)]{
-		tuple.New2("D:v1", benchmarkSliceDropA),
-		tuple.New2("D:v2", benchmarkSliceDropB),
 		tuple.New2("C:v1", benchmarkSliceCollectA),
 		tuple.New2("C:v2", benchmarkSliceCollectB),
 	}
@@ -28,22 +26,6 @@ func BenchmarkSlice(b *testing.B) {
 				})
 			}
 		})
-	}
-}
-
-func benchmarkSliceDropA(b *testing.B, n int) {
-	data := iter.Sequence(0, n).Collect()
-	b.ResetTimer()
-	for i := 0; i != b.N; i++ {
-		iter.DropAll[int](iter.Slice(data))
-	}
-}
-
-func benchmarkSliceDropB(b *testing.B, n int) {
-	data := iter.Sequence(0, n).Collect()
-	b.ResetTimer()
-	for i := 0; i != b.N; i++ {
-		iter.Slice(data).DropAll()
 	}
 }
 
