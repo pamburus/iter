@@ -7,7 +7,7 @@ import (
 
 // Zip returns an Iterator adapter that Zips each value provided by the
 // underlying iterator using fn.
-func Zip[T, U any, I1 Iterator[T], I2 Iterator[U]](i1 I1, i2 I2) It[tuple.T2[T, U], *zipIterator[T, U, I1, I2]] {
+func Zip[T, U any, I1 Iterator[T], I2 Iterator[U]](i1 I1, i2 I2) It[tuple.T2[T, U]] {
 	return New[tuple.T2[T, U]](
 		&zipIterator[T, U, I1, I2]{
 			i1,

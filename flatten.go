@@ -2,7 +2,7 @@ package iter
 
 // Flatten returns an Iterator adapter that Flattens each value provided by the
 // underlying iterator using fn.
-func Flatten[T any, I Iterator[Iterator[T]]](it I) It[T, *flattenIterator[T, I]] {
+func Flatten[T any, I Iterator[Iterator[T]]](it I) It[T] {
 	return New[T](&flattenIterator[T, I]{it, nil})
 }
 
