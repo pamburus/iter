@@ -12,7 +12,7 @@ import (
 func TestChain(t *testing.T) {
 	g := gomegax.New(t)
 
-	g.Expect(iter.Sequence(1, 4).Chain(iter.Sequence(10, 12)).Collect()).To(Equal([]int{1, 2, 3, 10, 11}))
+	g.Expect(iter.Sequence(1, 4).Chain(iter.Sequence(10, 12)).CollectAll()).To(Equal([]int{1, 2, 3, 10, 11}))
 }
 
 func BenchmarkChain(b *testing.B) {
@@ -53,12 +53,12 @@ func benchmarkChainDropB(b *testing.B, n int) {
 
 func benchmarkChainCollectA(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.Collect[int](iter.Chain[int](iter.Sequence(0, n/2), iter.Sequence(n/2, n)))
+		iter.CollectAll[int](iter.Chain[int](iter.Sequence(0, n/2), iter.Sequence(n/2, n)))
 	}
 }
 
 func benchmarkChainCollectB(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.Sequence(0, n/2).Chain(iter.Sequence(n/2, n)).Collect()
+		iter.Sequence(0, n/2).Chain(iter.Sequence(n/2, n)).CollectAll()
 	}
 }

@@ -41,9 +41,9 @@ func (i *chainIterator[T]) SizeHint() (Size, bool) {
 }
 
 // Collect consumes the iterator and returns the consumed values.
-func (i *chainIterator[T]) CollectInto(result []T) []T {
+func (i *chainIterator[T]) CollectAllInto(result []T) []T {
 	for !i.empty() {
-		result = CollectInto(i.get(), result)
+		result = CollectAllInto(i.get(), result)
 		i.next()
 	}
 
@@ -51,13 +51,13 @@ func (i *chainIterator[T]) CollectInto(result []T) []T {
 }
 
 // CollectNInto consumes the iterator and returns the consumed values.
-func (i *chainIterator[T]) CollectNInto(n int, result []T) []T {
+func (i *chainIterator[T]) CollectInto(n int, result []T) []T {
 	if size, ok := i.SizeHint(); ok {
 		n = int(MinValue(Size(n), size))
 	}
 
 	for !i.empty() {
-		result = CollectNInto(i.get(), n-len(result), result)
+		result = CollectInto(i.get(), n-len(result), result)
 		i.next()
 	}
 
@@ -105,9 +105,8 @@ func (i *chainIterator[T]) next() {
 type ttChainIt = *chainIterator[int]
 
 var (
-	_ Iterator[int]       = ttChainIt(nil)
-	_ SizeHinter          = ttChainIt(nil)
-	_ Dropper             = ttChainIt(nil)
-	_ CollectorInto[int]  = ttChainIt(nil)
-	_ CollectorNInto[int] = ttChainIt(nil)
+	_ Iterator[int]      = ttChainIt(nil)
+	_ SizeHinter         = ttChainIt(nil)
+	_ Dropper            = ttChainIt(nil)
+	_ CollectorInto[int] = ttChainIt(nil)
 )

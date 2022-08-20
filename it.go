@@ -36,20 +36,20 @@ func (i It[T]) Find(predicate func(T) bool) (T, bool) {
 	return Find(i.it, predicate)
 }
 
-func (i It[T]) Collect() []T {
-	return Collect[T](i.it)
+func (i It[T]) CollectAll() []T {
+	return CollectAll[T](i.it)
 }
 
-func (i It[T]) CollectInto(result []T) []T {
-	return CollectInto(i.it, result)
+func (i It[T]) CollectAllInto(result []T) []T {
+	return CollectAllInto(i.it, result)
 }
 
-func (i It[T]) CollectN(n int) []T {
-	return CollectN[T](i.it, n)
+func (i It[T]) Collect(n int) []T {
+	return Collect[T](i.it, n)
 }
 
-func (i It[T]) CollectNInto(n int, result []T) []T {
-	return CollectNInto(i.it, n, result)
+func (i It[T]) CollectInto(n int, result []T) []T {
+	return CollectInto(i.it, n, result)
 }
 
 func (i It[T]) Take(n Size) It[T] {

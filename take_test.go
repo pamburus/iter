@@ -58,12 +58,12 @@ func benchmarkTakeDropB(b *testing.B, n int) {
 
 func benchmarkTakeCollectA(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.Collect[int](iter.Take[int](iter.Sequence(0, n*2), iter.Size(n)))
+		iter.CollectAll[int](iter.Take[int](iter.Sequence(0, n*2), iter.Size(n)))
 	}
 }
 
 func benchmarkTakeCollectB(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.Sequence(0, n*2).Take(iter.Size(n)).Collect()
+		iter.Sequence(0, n*2).Take(iter.Size(n)).CollectAll()
 	}
 }

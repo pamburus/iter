@@ -17,7 +17,7 @@ func TestZip(t *testing.T) {
 			iter.Zip[int, int](
 				iter.Sequence(0, 3),
 				iter.Sequence(10, 13),
-			).Collect(),
+			).CollectAll(),
 		).To(
 			Equal([]tuple.T2[int, int]{
 				{V1: 0, V2: 10},
@@ -32,7 +32,7 @@ func TestZip(t *testing.T) {
 			iter.Zip[int, int](
 				iter.Sequence(0, 3),
 				iter.Sequence(10, 15),
-			).Collect(),
+			).CollectAll(),
 		).To(
 			Equal([]tuple.T2[int, int]{
 				{V1: 0, V2: 10},
@@ -47,7 +47,7 @@ func TestZip(t *testing.T) {
 			iter.Zip[int, int](
 				iter.Sequence(0, 5),
 				iter.Sequence(10, 13),
-			).Collect(),
+			).CollectAll(),
 		).To(
 			Equal([]tuple.T2[int, int]{
 				{V1: 0, V2: 10},

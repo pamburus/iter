@@ -54,12 +54,12 @@ func (i *takeIterator[T, I]) Drop(n Size) Size {
 	return m
 }
 
-func (i *takeIterator[T, I]) CollectInto(result []T) []T {
-	return i.CollectNInto(int(MinValue(i.n, Size(math.MaxInt))), result)
+func (i *takeIterator[T, I]) CollectAllInto(result []T) []T {
+	return i.CollectInto(int(MinValue(i.n, Size(math.MaxInt))), result)
 }
 
-func (i *takeIterator[T, I]) CollectNInto(n int, result []T) []T {
-	result = CollectNInto(i.it, int(MinValue(Size(n), i.n)), result)
+func (i *takeIterator[T, I]) CollectInto(n int, result []T) []T {
+	result = CollectInto(i.it, int(MinValue(Size(n), i.n)), result)
 	i.n -= Size(len(result))
 
 	return result
@@ -70,9 +70,8 @@ func (i *takeIterator[T, I]) CollectNInto(n int, result []T) []T {
 type ttTakeIt = *takeIterator[int, Iterator[int]]
 
 var (
-	_ Iterator[int]       = ttTakeIt(nil)
-	_ SizeHinter          = ttTakeIt(nil)
-	_ Dropper             = ttTakeIt(nil)
-	_ CollectorInto[int]  = ttTakeIt(nil)
-	_ CollectorNInto[int] = ttTakeIt(nil)
+	_ Iterator[int]      = ttTakeIt(nil)
+	_ SizeHinter         = ttTakeIt(nil)
+	_ Dropper            = ttTakeIt(nil)
+	_ CollectorInto[int] = ttTakeIt(nil)
 )

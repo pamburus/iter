@@ -35,12 +35,12 @@ func TestFunc(t *testing.T) {
 		g.Expect(optional.New(it.Next())).To(Equal(optional.New(0, false)))
 	})
 
-	g.Run("Collect", func(g gomegax.G) {
-		g.Expect(iter.Collect[int](iter.Func(f()))).To(Equal([]int{1, 2, 3}))
-		g.Expect(iter.Func(f()).Collect()).To(Equal([]int{1, 2, 3}))
+	g.Run("CollectAll", func(g gomegax.G) {
+		g.Expect(iter.CollectAll[int](iter.Func(f()))).To(Equal([]int{1, 2, 3}))
+		g.Expect(iter.Func(f()).CollectAll()).To(Equal([]int{1, 2, 3}))
 	})
 
-	g.Run("CollectN", func(g gomegax.G) {
-		g.Expect(iter.Func(f()).CollectN(2)).To(Equal([]int{1, 2}))
+	g.Run("Collect", func(g gomegax.G) {
+		g.Expect(iter.Func(f()).Collect(2)).To(Equal([]int{1, 2}))
 	})
 }
