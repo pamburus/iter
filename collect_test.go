@@ -12,6 +12,6 @@ func TestCollect(t *testing.T) {
 	g := gomegax.New(t)
 
 	g.Run("Empty", func(g gomegax.G) {
-		g.Expect(iter.Collect[int](iter.Empty[int]())).To(Equal([]int{}))
+		g.Expect(iter.CollectAll[int](iter.Empty[int]())).To(Equal([]int{}))
 	})
 }

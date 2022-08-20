@@ -47,7 +47,7 @@ func benchmarkFilterDropB(b *testing.B, n int) {
 }
 
 func benchmarkFilterDropC(b *testing.B, n int) {
-	data := iter.Sequence(0, n).Collect()
+	data := iter.Sequence(0, n).CollectAll()
 	b.ResetTimer()
 	for i := 0; i != b.N; i++ {
 		iter.Slice(data).Filter(odd).DropAll()
@@ -56,21 +56,21 @@ func benchmarkFilterDropC(b *testing.B, n int) {
 
 func benchmarkFilterCollectA(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.Collect[int](iter.Filter(iter.Sequence(0, n), odd))
+		iter.CollectAll[int](iter.Filter(iter.Sequence(0, n), odd))
 	}
 }
 
 func benchmarkFilterCollectB(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.Sequence(0, n).Filter(odd).Collect()
+		iter.Sequence(0, n).Filter(odd).CollectAll()
 	}
 }
 
 func benchmarkFilterCollectC(b *testing.B, n int) {
-	data := iter.Sequence(0, n).Collect()
+	data := iter.Sequence(0, n).CollectAll()
 	b.ResetTimer()
 	for i := 0; i != b.N; i++ {
-		iter.Slice(data).Filter(odd).Collect()
+		iter.Slice(data).Filter(odd).CollectAll()
 	}
 }
 

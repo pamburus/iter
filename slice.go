@@ -30,7 +30,7 @@ func (i *sliceIterator[T]) SizeHint() (Size, bool) {
 }
 
 // Collect consumes the iterator and returns the consumed values.
-func (i *sliceIterator[T]) CollectInto(result []T) []T {
+func (i *sliceIterator[T]) CollectAllInto(result []T) []T {
 	result = append(result, (i.values)...)
 	i.values = nil
 
@@ -38,7 +38,7 @@ func (i *sliceIterator[T]) CollectInto(result []T) []T {
 }
 
 // CollectNInto consumes the iterator and returns the consumed values.
-func (i *sliceIterator[T]) CollectNInto(n int, result []T) []T {
+func (i *sliceIterator[T]) CollectInto(n int, result []T) []T {
 	n = MinValue(n, len(i.values))
 	result = append(result, (i.values)[:n]...)
 	i.values = (i.values)[n:]

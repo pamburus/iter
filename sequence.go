@@ -46,12 +46,12 @@ func (i *sequenceIterator[T]) Drop(n Size) Size {
 }
 
 // CollectInto consumes the iterator and returns the consumed values.
-func (i *sequenceIterator[T]) CollectInto(result []T) []T {
-	return i.CollectNInto(int(i.len()), result)
+func (i *sequenceIterator[T]) CollectAllInto(result []T) []T {
+	return i.CollectInto(int(i.len()), result)
 }
 
 // CollectNInto consumes the iterator and returns the consumed values.
-func (i *sequenceIterator[T]) CollectNInto(n int, result []T) []T {
+func (i *sequenceIterator[T]) CollectInto(n int, result []T) []T {
 	m := T(MinValue(n, int(i.len())))
 	end := i.i + m
 	for j := i.i; j != end; j++ {
@@ -71,8 +71,7 @@ func (i *sequenceIterator[T]) len() T {
 type ttSequenceIt = *sequenceIterator[int]
 
 var (
-	_ SizeHinter          = ttSequenceIt(nil)
-	_ Dropper             = ttSequenceIt(nil)
-	_ CollectorInto[int]  = ttSequenceIt(nil)
-	_ CollectorNInto[int] = ttSequenceIt(nil)
+	_ SizeHinter         = ttSequenceIt(nil)
+	_ Dropper            = ttSequenceIt(nil)
+	_ CollectorInto[int] = ttSequenceIt(nil)
 )

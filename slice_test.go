@@ -32,7 +32,7 @@ func BenchmarkSlice(b *testing.B) {
 }
 
 func benchmarkSliceDropA(b *testing.B, n int) {
-	data := iter.Sequence(0, n).Collect()
+	data := iter.Sequence(0, n).CollectAll()
 	b.ResetTimer()
 	for i := 0; i != b.N; i++ {
 		iter.DropAll[int](iter.Slice(data))
@@ -40,7 +40,7 @@ func benchmarkSliceDropA(b *testing.B, n int) {
 }
 
 func benchmarkSliceDropB(b *testing.B, n int) {
-	data := iter.Sequence(0, n).Collect()
+	data := iter.Sequence(0, n).CollectAll()
 	b.ResetTimer()
 	for i := 0; i != b.N; i++ {
 		iter.Slice(data).DropAll()
@@ -48,17 +48,17 @@ func benchmarkSliceDropB(b *testing.B, n int) {
 }
 
 func benchmarkSliceCollectA(b *testing.B, n int) {
-	data := iter.Sequence(0, n).Collect()
+	data := iter.Sequence(0, n).CollectAll()
 	b.ResetTimer()
 	for i := 0; i != b.N; i++ {
-		iter.Collect[int](iter.Slice(data))
+		iter.CollectAll[int](iter.Slice(data))
 	}
 }
 
 func benchmarkSliceCollectB(b *testing.B, n int) {
-	data := iter.Sequence(0, n).Collect()
+	data := iter.Sequence(0, n).CollectAll()
 	b.ResetTimer()
 	for i := 0; i != b.N; i++ {
-		iter.Slice(data).Collect()
+		iter.Slice(data).CollectAll()
 	}
 }

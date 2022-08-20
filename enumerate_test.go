@@ -15,7 +15,7 @@ func TestEnumerate(t *testing.T) {
 	g.Expect(
 		iter.Enumerate[int](
 			iter.Sequence(10, 13),
-		).Collect(),
+		).CollectAll(),
 	).To(
 		Equal([]tuple.T2[uint64, int]{
 			{V1: 0, V2: 10},

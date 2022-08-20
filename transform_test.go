@@ -45,13 +45,13 @@ func benchmarkTransformDropB(b *testing.B, n int) {
 
 func benchmarkTransformCollectA(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.Collect[int](iter.Transform(iter.Sequence(0, n), double))
+		iter.CollectAll[int](iter.Transform(iter.Sequence(0, n), double))
 	}
 }
 
 func benchmarkTransformCollectB(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.Transform(iter.Sequence(0, n), double).Collect()
+		iter.Transform(iter.Sequence(0, n), double).CollectAll()
 	}
 }
 

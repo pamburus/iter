@@ -20,12 +20,8 @@ type SizeHinter interface {
 
 // CollectorInto is any type the can have CollectInto method taking a slice of T and returning a slice of T.
 type CollectorInto[T any] interface {
-	CollectInto([]T) []T
-}
-
-// CollectorNInto is any type the can have CollectInto method taking a slice of T and returning a slice of T.
-type CollectorNInto[T any] interface {
-	CollectNInto(int, []T) []T
+	CollectInto(int, []T) []T
+	CollectAllInto([]T) []T
 }
 
 // Dropper allows dropping elements from iterator.
@@ -42,5 +38,4 @@ type complete[T any] interface {
 	SizeHinter
 	Dropper
 	CollectorInto[T]
-	CollectorNInto[T]
 }
