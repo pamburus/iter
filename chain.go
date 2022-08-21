@@ -1,6 +1,6 @@
 package iter
 
-// Chain returns an Iterator adapter that Chains each value provided by the
+// Chain returns an iterator adapter that chains each value provided by the
 // underlying iterator using fn.
 func Chain[T any](its ...Iterator[T]) It[T] {
 	return New[T](&chainIterator[T]{its})
@@ -8,12 +8,10 @@ func Chain[T any](its ...Iterator[T]) It[T] {
 
 // ---
 
-// chainIterator is an iterator that Chains each value T provided by the underlying iterator I using function F to value R.
 type chainIterator[T any] struct {
 	its []Iterator[T]
 }
 
-// Next gets next value T from iterator, applies function F to it and returns returned value R.
 func (i *chainIterator[T]) Next() (T, bool) {
 	for !i.empty() {
 		if v, ok := i.get().Next(); ok {
@@ -26,7 +24,6 @@ func (i *chainIterator[T]) Next() (T, bool) {
 	return ZeroValue[T](), false
 }
 
-// SizeHint returns estimated remaining count of elements if known.
 func (i *chainIterator[T]) SizeHint() (Size, bool) {
 	result := Size(0)
 	for _, it := range i.its {
@@ -40,7 +37,6 @@ func (i *chainIterator[T]) SizeHint() (Size, bool) {
 	return result, true
 }
 
-// Collect consumes the iterator and returns the consumed values.
 func (i *chainIterator[T]) CollectAllInto(result []T) []T {
 	for !i.empty() {
 		result = CollectAllInto(i.get(), result)
@@ -50,7 +46,6 @@ func (i *chainIterator[T]) CollectAllInto(result []T) []T {
 	return result
 }
 
-// CollectNInto consumes the iterator and returns the consumed values.
 func (i *chainIterator[T]) CollectInto(n int, result []T) []T {
 	if size, ok := i.SizeHint(); ok {
 		n = int(MinValue(Size(n), size))
@@ -64,21 +59,19 @@ func (i *chainIterator[T]) CollectInto(n int, result []T) []T {
 	return result
 }
 
-// DropAll drops all elements from the iterator.
-func (i *chainIterator[T]) DropAll() Size {
+func (i *chainIterator[T]) DiscardAll() Size {
 	n := Size(0)
 	for !i.empty() {
-		n += DropAll[T](i.get())
+		n += DiscardAll[T](i.get())
 		i.next()
 	}
 
 	return n
 }
 
-// Drop drops n next elements from the iterator.
-func (i *chainIterator[T]) Drop(n Size) Size {
+func (i *chainIterator[T]) Discard(n Size) Size {
 	for n > 0 && !i.empty() {
-		m := Drop[T](i.get(), n)
+		m := Discard[T](i.get(), n)
 		n -= m
 		if m == 0 {
 			i.next()
@@ -107,6 +100,6 @@ type ttChainIt = *chainIterator[int]
 var (
 	_ Iterator[int]      = ttChainIt(nil)
 	_ SizeHinter         = ttChainIt(nil)
-	_ Dropper            = ttChainIt(nil)
+	_ Discarder          = ttChainIt(nil)
 	_ CollectorInto[int] = ttChainIt(nil)
 )

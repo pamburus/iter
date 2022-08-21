@@ -32,13 +32,13 @@ func (i *sequenceIterator[T]) SizeHint() (Size, bool) {
 	return Size(i.end - i.i), true
 }
 
-// DropAll drops all elements from the iterator.
-func (i *sequenceIterator[T]) DropAll() Size {
-	return i.Drop(Size(i.end - i.i))
+// DiscardAll drops all elements from the iterator.
+func (i *sequenceIterator[T]) DiscardAll() Size {
+	return i.Discard(Size(i.end - i.i))
 }
 
-// Drop drops n next elements from the iterator.
-func (i *sequenceIterator[T]) Drop(n Size) Size {
+// Discard drops n next elements from the iterator.
+func (i *sequenceIterator[T]) Discard(n Size) Size {
 	n = MinValue(Size(i.len()), n)
 	i.i -= T(n)
 
@@ -72,6 +72,6 @@ type ttSequenceIt = *sequenceIterator[int]
 
 var (
 	_ SizeHinter         = ttSequenceIt(nil)
-	_ Dropper            = ttSequenceIt(nil)
+	_ Discarder          = ttSequenceIt(nil)
 	_ CollectorInto[int] = ttSequenceIt(nil)
 )

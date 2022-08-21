@@ -22,8 +22,8 @@ func TestTake(t *testing.T) {
 
 func BenchmarkTake(b *testing.B) {
 	funcs := []tuple.T2[string, func(*testing.B, int)]{
-		tuple.New2("D:v1", benchmarkTakeDropA),
-		tuple.New2("D:v2", benchmarkTakeDropB),
+		tuple.New2("D:v1", benchmarkTakeDiscardA),
+		tuple.New2("D:v2", benchmarkTakeDiscardB),
 		tuple.New2("C:v1", benchmarkTakeCollectA),
 		tuple.New2("C:v2", benchmarkTakeCollectB),
 	}
@@ -44,15 +44,15 @@ func BenchmarkTake(b *testing.B) {
 	}
 }
 
-func benchmarkTakeDropA(b *testing.B, n int) {
+func benchmarkTakeDiscardA(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.DropAll[int](iter.Take[int](iter.Sequence(0, n*2), iter.Size(n)))
+		iter.DiscardAll[int](iter.Take[int](iter.Sequence(0, n*2), iter.Size(n)))
 	}
 }
 
-func benchmarkTakeDropB(b *testing.B, n int) {
+func benchmarkTakeDiscardB(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.Sequence(0, n*2).Take(iter.Size(n)).DropAll()
+		iter.Sequence(0, n*2).Take(iter.Size(n)).DiscardAll()
 	}
 }
 

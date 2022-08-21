@@ -9,8 +9,8 @@ import (
 
 func BenchmarkTransform(b *testing.B) {
 	funcs := []tuple.T2[string, func(*testing.B, int)]{
-		tuple.New2("D:v1", benchmarkTransformDropA),
-		tuple.New2("D:v2", benchmarkTransformDropB),
+		tuple.New2("D:v1", benchmarkTransformDiscardA),
+		tuple.New2("D:v2", benchmarkTransformDiscardB),
 		tuple.New2("C:v1", benchmarkTransformCollectA),
 		tuple.New2("C:v2", benchmarkTransformCollectB),
 	}
@@ -31,15 +31,15 @@ func BenchmarkTransform(b *testing.B) {
 	}
 }
 
-func benchmarkTransformDropA(b *testing.B, n int) {
+func benchmarkTransformDiscardA(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.DropAll[int](iter.Transform(iter.Sequence(0, n), double))
+		iter.DiscardAll[int](iter.Transform(iter.Sequence(0, n), double))
 	}
 }
 
-func benchmarkTransformDropB(b *testing.B, n int) {
+func benchmarkTransformDiscardB(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.Transform(iter.Sequence(0, n), double).DropAll()
+		iter.Transform(iter.Sequence(0, n), double).DiscardAll()
 	}
 }
 

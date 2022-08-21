@@ -9,9 +9,9 @@ import (
 
 func BenchmarkFilter(b *testing.B) {
 	funcs := []tuple.T2[string, func(*testing.B, int)]{
-		tuple.New2("D:v1", benchmarkFilterDropA),
-		tuple.New2("D:v2", benchmarkFilterDropB),
-		tuple.New2("D:v3", benchmarkFilterDropC),
+		tuple.New2("D:v1", benchmarkFilterDiscardA),
+		tuple.New2("D:v2", benchmarkFilterDiscardB),
+		tuple.New2("D:v3", benchmarkFilterDiscardC),
 		tuple.New2("C:v1", benchmarkFilterCollectA),
 		tuple.New2("C:v2", benchmarkFilterCollectB),
 		tuple.New2("C:v3", benchmarkFilterCollectC),
@@ -34,23 +34,23 @@ func BenchmarkFilter(b *testing.B) {
 	}
 }
 
-func benchmarkFilterDropA(b *testing.B, n int) {
+func benchmarkFilterDiscardA(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.DropAll[int](iter.Filter(iter.Sequence(0, n), odd))
+		iter.DiscardAll[int](iter.Filter(iter.Sequence(0, n), odd))
 	}
 }
 
-func benchmarkFilterDropB(b *testing.B, n int) {
+func benchmarkFilterDiscardB(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.Sequence(0, n).Filter(odd).DropAll()
+		iter.Sequence(0, n).Filter(odd).DiscardAll()
 	}
 }
 
-func benchmarkFilterDropC(b *testing.B, n int) {
+func benchmarkFilterDiscardC(b *testing.B, n int) {
 	data := iter.Sequence(0, n).CollectAll()
 	b.ResetTimer()
 	for i := 0; i != b.N; i++ {
-		iter.Slice(data).Filter(odd).DropAll()
+		iter.Slice(data).Filter(odd).DiscardAll()
 	}
 }
 

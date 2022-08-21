@@ -46,13 +46,13 @@ func (i *sliceIterator[T]) CollectInto(n int, result []T) []T {
 	return result
 }
 
-// DropAll drops all elements from the iterator.
-func (i *sliceIterator[T]) DropAll() Size {
-	return i.Drop(Size(len(i.values)))
+// DiscardAll drops all elements from the iterator.
+func (i *sliceIterator[T]) DiscardAll() Size {
+	return i.Discard(Size(len(i.values)))
 }
 
-// Drop drops n next elements from the iterator.
-func (i *sliceIterator[T]) Drop(n Size) Size {
+// Discard drops n next elements from the iterator.
+func (i *sliceIterator[T]) Discard(n Size) Size {
 	n = MinValue(Size(len(i.values)), n)
 	i.values = (i.values)[int(n):]
 
@@ -67,5 +67,5 @@ var (
 	_ Iterator[int]      = ttSliceIt(nil)
 	_ SizeHinter         = ttSliceIt(nil)
 	_ CollectorInto[int] = ttSliceIt(nil)
-	_ Dropper            = ttSliceIt(nil)
+	_ Discarder          = ttSliceIt(nil)
 )

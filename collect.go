@@ -1,6 +1,6 @@
 package iter
 
-// CollectAll transforms an Iterator into a slice.
+// CollectAll transforms an iterator into a slice.
 func CollectAll[T any, I Iterator[T]](it I) []T {
 	n := 0
 	if size, ok := SizeHint[T](it); ok {
@@ -12,7 +12,7 @@ func CollectAll[T any, I Iterator[T]](it I) []T {
 	return CollectAllInto(it, result)
 }
 
-// CollectAllInto gets all values from an Iterator and appends them to a given slice returning a new slice.
+// CollectAllInto gets all values from an iterator and appends them to a given slice returning the same or a new slice.
 func CollectAllInto[T any, I Iterator[T], S ~[]T](it I, result S) S {
 	if coll, ok := Iterator[T](it).(CollectorInto[T]); ok {
 		return coll.CollectAllInto(result)
@@ -25,7 +25,7 @@ func CollectAllInto[T any, I Iterator[T], S ~[]T](it I, result S) S {
 	return result
 }
 
-// Collect transforms up to n values of an Iterator into a slice.
+// Collect transforms up to n values of an iterator into a slice.
 func Collect[T any, I Iterator[T]](it I, n int) []T {
 	if size, ok := SizeHint[T](it); ok {
 		n = int(MinValue(Size(n), size))
@@ -36,7 +36,7 @@ func Collect[T any, I Iterator[T]](it I, n int) []T {
 	return CollectInto(it, n, result)
 }
 
-// CollectInto gets up to N values from an Iterator and appends them to a given slice returning a new slice.
+// CollectInto gets up to N values from an iterator and appends them to a given slice returning the same or a new slice.
 func CollectInto[T any, I Iterator[T], S ~[]T](it I, n int, result S) S {
 	if coll, ok := Iterator[T](it).(CollectorInto[T]); ok {
 		return coll.CollectInto(n, result)
