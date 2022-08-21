@@ -56,12 +56,12 @@ func (i It[T]) Take(n Size) It[T] {
 	return Take[T](i.it, n)
 }
 
-func (i It[T]) Drop(n Size) Size {
-	return Drop[T](i.it, n)
+func (i It[T]) Discard(n Size) Size {
+	return Discard[T](i.it, n)
 }
 
-func (i It[T]) DropAll() Size {
-	return DropAll[T](i.it)
+func (i It[T]) DiscardAll() Size {
+	return DiscardAll[T](i.it)
 }
 
 func (i It[T]) Filter(predicate func(T) bool) It[T] {

@@ -24,10 +24,10 @@ type CollectorInto[T any] interface {
 	CollectAllInto([]T) []T
 }
 
-// Dropper allows dropping elements from iterator.
-type Dropper interface {
-	Drop(Size) Size
-	DropAll() Size
+// Discarder allows dropping elements from iterator.
+type Discarder interface {
+	Discard(Size) Size
+	DiscardAll() Size
 }
 
 // ---
@@ -36,6 +36,6 @@ type complete[T any] interface {
 	Iterator[T]
 	Iterable[T]
 	SizeHinter
-	Dropper
+	Discarder
 	CollectorInto[T]
 }

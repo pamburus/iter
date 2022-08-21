@@ -30,15 +30,15 @@ func (i *enumerateIterator[T, I]) SizeHint() (Size, bool) {
 	return SizeHint[T](i.it)
 }
 
-func (i *enumerateIterator[T, I]) DropAll() Size {
-	n := DropAll[T](i.it)
+func (i *enumerateIterator[T, I]) DiscardAll() Size {
+	n := DiscardAll[T](i.it)
 	i.i += n
 
 	return n
 }
 
-func (i *enumerateIterator[T, I]) Drop(n Size) Size {
-	n = Drop[T](i.it, n)
+func (i *enumerateIterator[T, I]) Discard(n Size) Size {
+	n = Discard[T](i.it, n)
 	i.i += n
 
 	return n
@@ -51,5 +51,5 @@ type ttEnumerateIt = *enumerateIterator[int, Iterator[int]]
 var (
 	_ Iterator[tuple.T2[Size, int]] = ttEnumerateIt(nil)
 	_ SizeHinter                    = ttEnumerateIt(nil)
-	_ Dropper                       = ttEnumerateIt(nil)
+	_ Discarder                     = ttEnumerateIt(nil)
 )

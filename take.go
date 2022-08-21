@@ -40,15 +40,15 @@ func (i *takeIterator[T, I]) SizeHint() (Size, bool) {
 	return result, true
 }
 
-// DropAll drops all elements from the iterator.
-func (i *takeIterator[T, I]) DropAll() Size {
-	return i.Drop(i.n)
+// DiscardAll drops all elements from the iterator.
+func (i *takeIterator[T, I]) DiscardAll() Size {
+	return i.Discard(i.n)
 }
 
-// Drop drops n next elements from the iterator.
-func (i *takeIterator[T, I]) Drop(n Size) Size {
+// Discard drops n next elements from the iterator.
+func (i *takeIterator[T, I]) Discard(n Size) Size {
 	n = MinValue(n, i.n)
-	m := Drop[T](i.it, n)
+	m := Discard[T](i.it, n)
 	i.n -= m
 
 	return m
@@ -72,6 +72,6 @@ type ttTakeIt = *takeIterator[int, Iterator[int]]
 var (
 	_ Iterator[int]      = ttTakeIt(nil)
 	_ SizeHinter         = ttTakeIt(nil)
-	_ Dropper            = ttTakeIt(nil)
+	_ Discarder          = ttTakeIt(nil)
 	_ CollectorInto[int] = ttTakeIt(nil)
 )

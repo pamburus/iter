@@ -17,8 +17,8 @@ func TestChain(t *testing.T) {
 
 func BenchmarkChain(b *testing.B) {
 	funcs := []tuple.T2[string, func(*testing.B, int)]{
-		tuple.New2("D:v1", benchmarkChainDropA),
-		tuple.New2("D:v2", benchmarkChainDropB),
+		tuple.New2("D:v1", benchmarkChainDiscardA),
+		tuple.New2("D:v2", benchmarkChainDiscardB),
 		tuple.New2("C:v1", benchmarkChainCollectA),
 		tuple.New2("C:v2", benchmarkChainCollectB),
 	}
@@ -39,15 +39,15 @@ func BenchmarkChain(b *testing.B) {
 	}
 }
 
-func benchmarkChainDropA(b *testing.B, n int) {
+func benchmarkChainDiscardA(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.DropAll[int](iter.Chain[int](iter.Sequence(0, n/2), iter.Sequence(n/2, n)))
+		iter.DiscardAll[int](iter.Chain[int](iter.Sequence(0, n/2), iter.Sequence(n/2, n)))
 	}
 }
 
-func benchmarkChainDropB(b *testing.B, n int) {
+func benchmarkChainDiscardB(b *testing.B, n int) {
 	for i := 0; i != b.N; i++ {
-		iter.Sequence(0, n/2).Chain(iter.Sequence(n/2, n)).DropAll()
+		iter.Sequence(0, n/2).Chain(iter.Sequence(n/2, n)).DiscardAll()
 	}
 }
 
