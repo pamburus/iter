@@ -1,7 +1,7 @@
 package iter
 
 import (
-	"github.com/pamburus/iter/optional"
+	"github.com/pamburus/optional"
 	"golang.org/x/exp/constraints"
 )
 
