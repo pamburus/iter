@@ -2,7 +2,7 @@ package iter
 
 import (
 	"github.com/barweiss/go-tuple"
-	"github.com/pamburus/iter/optional"
+	"github.com/pamburus/optional"
 )
 
 // Zip returns an iterator adapter that produces pairs as a tuple of consecutive values from two iterators.

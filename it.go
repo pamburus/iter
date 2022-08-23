@@ -1,6 +1,6 @@
 package iter
 
-import "github.com/pamburus/iter/optional"
+import "github.com/pamburus/optional"
 
 // ---
 

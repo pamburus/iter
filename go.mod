@@ -6,6 +6,7 @@ require (
 	github.com/barweiss/go-tuple v1.0.2
 	github.com/onsi/gomega v1.20.0
 	github.com/pamburus/gomegax v0.0.0-20220820094553-dddfb35087a0
+	github.com/pamburus/optional v0.1.0
 	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e
 )
 

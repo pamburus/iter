@@ -6,7 +6,7 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/pamburus/gomegax"
 	"github.com/pamburus/iter"
-	"github.com/pamburus/iter/optional"
+	"github.com/pamburus/optional"
 )
 
 func TestFind(t *testing.T) {
